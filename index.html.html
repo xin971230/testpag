@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>客戶倉儲需求評估表</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* 隱藏元素的輔助 class */
+        .hidden-section { display: none !important; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+
+    <div id="form-container" class="max-w-3xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden">
+        <div class="bg-gradient-to-r from-blue-700 to-blue-500 p-8 text-white">
+            <div class="flex items-center space-x-3 mb-2">
+                <i data-lucide="clipboard-list" class="w-8 h-8"></i>
+                <h1 class="text-3xl font-bold tracking-tight">客戶倉儲需求評估表</h1>
+            </div>
+            <p class="text-blue-100 mt-2 text-lg">你好，請填寫下方資訊，以利我們協助您評估與規劃最合適的空間方案。</p>
+        </div>
+
+        <form id="assessment-form" class="p-8 space-y-8">
+            <div class="space-y-6">
+                <h2 class="text-xl font-bold text-gray-800 border-b pb-2 flex items-center">
+                    <i data-lucide="building" class="w-5 h-5 mr-2 text-blue-600"></i> 場地與環境資訊
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">1. 請問這個廠區是租賃或自有廠房？ <span class="text-red-500">*</span></label>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="factoryType" value="lease" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">租賃</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="factoryType" value="own" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">自有</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">2. 地點為： <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <i data-lucide="map-pin" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4"></i>
+                            <select id="location-select" name="location" required class="pl-9 w-full rounded-md border-gray-300 border shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 bg-white">
+                                <option value="">請選擇縣市</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2 mt-2 pt-4 border-t border-gray-100">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">● 規劃空間預計幾坪？ <span class="text-red-500">*</span></label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            <label class="flex items-center space-x-2 cursor-pointer p-3 border rounded-md hover:bg-blue-50 bg-white shadow-sm transition-colors">
+                                <input type="radio" name="estimatedSpace" value="50 坪以下" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-800 font-medium">50 坪以下</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer p-3 border rounded-md hover:bg-blue-50 bg-white shadow-sm transition-colors">
+                                <input type="radio" name="estimatedSpace" value="51-100 坪" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-800 font-medium">51-100 坪</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer p-3 border rounded-md hover:bg-blue-50 bg-white shadow-sm transition-colors">
+                                <input type="radio" name="estimatedSpace" value="101-300 坪" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-800 font-medium">101-300 坪</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer p-3 border rounded-md hover:bg-blue-50 bg-white shadow-sm transition-colors">
+                                <input type="radio" name="estimatedSpace" value="300 坪以上" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-800 font-medium">300 坪以上</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">10. 是否為挑高空間？ <span class="text-gray-400 font-normal text-xs">(可多一層空間使用)</span> <span class="text-red-500">*</span></label>
+                        <div class="flex space-x-4 mb-3">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="isHighCeiling" value="yes" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">是，有挑高</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="isHighCeiling" value="no" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">否，一般高度</span>
+                            </label>
+                        </div>
+                        <div class="mt-3 flex items-center space-x-2 p-2 bg-gray-50 border border-gray-200 rounded-md w-fit">
+                            <label class="text-sm font-medium text-gray-700">實際屋高<span class="text-red-500">*</span>：</label>
+                            <input type="number" step="0.1" min="0" name="ceilingHeight" required placeholder="例如: 6" class="w-20 rounded-md border-gray-300 border shadow-sm focus:border-blue-500 focus:ring-blue-500 py-1 px-2 text-center" />
+                            <span class="text-sm text-gray-700">米(m)</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">11. 廠房是1 樓嗎？ <span class="text-red-500">*</span></label>
+                        <div class="flex space-x-4 mb-3">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="isFirstFloor" value="yes" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">是1 樓</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="isFirstFloor" value="no" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">不是1 樓</span>
+                            </label>
+                        </div>
+                        <div id="not-first-floor-group" class="hidden-section mt-2 p-3 bg-amber-50 border border-amber-200 rounded-md space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-800 mb-1">請問廠房位於幾樓？ <span class="text-red-500">*</span></label>
+                                <input type="text" name="floorLevel" placeholder="例如: 3 或B1" class="w-full rounded-md border-gray-300 border shadow-sm focus:border-amber-500 focus:ring-amber-500 py-2 px-3" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-800 mb-1">請問每平方米荷重為？ (KG/m²)</label>
+                                <input type="number" name="floorLoadBearing" placeholder="例如: 300" class="w-full rounded-md border-gray-300 border shadow-sm focus:border-amber-500 focus:ring-amber-500 py-2 px-3" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6 pt-6 border-t border-gray-200">
+                <h2 class="text-xl font-bold text-gray-800 border-b pb-2 flex items-center">
+                    <i data-lucide="box" class="w-5 h-5 mr-2 text-blue-600"></i> 貨物與存取資訊
+                </h2>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">3. 儲存品項： <span class="text-red-500">*</span></label>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        <label class="flex items-center space-x-2 cursor-pointer p-2 border rounded-md hover:bg-gray-50">
+                            <input type="radio" name="storageItem" value="electronic" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                            <span class="text-gray-700">電子</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer p-2 border rounded-md hover:bg-gray-50">
+                            <input type="radio" name="storageItem" value="chemical" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                            <span class="text-gray-700">化學</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer p-2 border rounded-md hover:bg-gray-50">
+                            <input type="radio" name="storageItem" value="liquid" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                            <span class="text-gray-700">液體</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer p-2 border rounded-md hover:bg-gray-50">
+                            <input type="radio" name="storageItem" value="food" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                            <span class="text-gray-700">食品</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer p-2 border rounded-md hover:bg-gray-50">
+                            <input type="radio" name="storageItem" value="daily" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                            <span class="text-gray-700">生活用品</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer p-2 border rounded-md hover:bg-gray-50">
+                            <input type="radio" name="storageItem" value="other" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                            <span class="text-gray-700">其他</span>
+                        </label>
+                    </div>
+                    <input type="text" id="storageItemOther" name="storageItemOther" placeholder="請填寫其他儲存品項" class="hidden-section mt-3 w-full rounded-md border-gray-300 border shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">4. 如何儲存： <span class="text-red-500">*</span></label>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <label class="flex items-center space-x-2 cursor-pointer p-3 border rounded-md hover:bg-blue-50 flex-1">
+                            <input type="radio" name="accessMethod" value="manual" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                            <span class="text-gray-800 font-medium">人工存取</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer p-3 border rounded-md hover:bg-blue-50 flex-1">
+                            <input type="radio" name="accessMethod" value="machine" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                            <span class="text-gray-800 font-medium">機具存取(如堆高機)</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer p-3 border rounded-md hover:bg-blue-50 flex-1">
+                            <input type="radio" name="accessMethod" value="both" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                            <span class="text-gray-800 font-medium">兩者共存</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-gray-100">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">● 產品有無「先進先出」需求？ <span class="text-red-500">*</span></label>
+                        <div class="flex space-x-4 mb-3">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="needFIFO" value="yes" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">有先進先出</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="needFIFO" value="no" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">無限制</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">● 棧板儲存特性： <span class="text-red-500">*</span></label>
+                        <div class="flex flex-col space-y-3">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="palletDiversity" value="singleLarge" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">棧板品項單一、量大</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="palletDiversity" value="multiSmall" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">多品項、少量</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">● 環境溫度需求： <span class="text-red-500">*</span></label>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <label class="flex items-center space-x-2 cursor-pointer p-3 border rounded-md hover:bg-blue-50 flex-1">
+                                <input type="radio" name="tempType" value="normal" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-800 font-medium">常溫</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer p-3 border rounded-md hover:bg-blue-50 flex-1">
+                                <input type="radio" name="tempType" value="refrigerated" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-800 font-medium">冷藏</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer p-3 border rounded-md hover:bg-blue-50 flex-1">
+                                <input type="radio" name="tempType" value="frozen" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-800 font-medium">冷凍</span>
+                            </label>
+                        </div>
+                        <div id="temp-range-group" class="hidden-section mt-3 flex items-center space-x-2 p-2 bg-gray-50 border border-gray-200 rounded-md w-fit">
+                            <label class="text-sm font-medium text-gray-700">設定溫度<span class="text-red-500">*</span>：</label>
+                            <input type="number" name="tempRangeStart" placeholder="幾度" class="w-20 rounded-md border-gray-300 border shadow-sm focus:border-blue-500 focus:ring-blue-500 py-1 px-2 text-center" />
+                            <span class="text-sm text-gray-700">°C ~</span>
+                            <input type="number" name="tempRangeEnd" placeholder="幾度" class="w-20 rounded-md border-gray-300 border shadow-sm focus:border-blue-500 focus:ring-blue-500 py-1 px-2 text-center" />
+                            <span class="text-sm text-gray-700">°C</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50 p-5 rounded-lg border border-gray-200 mt-6">
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">5. 棧板/箱裝尺寸(長x 寬x 高) (cm)： <span class="text-red-500">*</span></label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div><input type="number" name="dimLength" placeholder="長" required class="w-full rounded-md border-gray-300 border shadow-sm py-2 px-3 text-center" /></div>
+                            <div><input type="number" name="dimWidth" placeholder="寬" required class="w-full rounded-md border-gray-300 border shadow-sm py-2 px-3 text-center" /></div>
+                            <div><input type="number" name="dimHeight" placeholder="高" required class="w-full rounded-md border-gray-300 border shadow-sm py-2 px-3 text-center" /></div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">6. 貨物高度含棧板(cm)： <span class="text-red-500">*</span></label>
+                        <input type="number" name="totalHeight" required placeholder="例如: 150" class="w-full rounded-md border-gray-300 border shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">7. 每板/箱荷重(KG)： <span class="text-red-500">*</span></label>
+                        <input type="number" name="loadPerItem" required placeholder="例如: 1000" class="w-full rounded-md border-gray-300 border shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6 pt-6 border-t border-gray-200">
+                <h2 class="text-xl font-bold text-gray-800 border-b pb-2 flex items-center">
+                    <i data-lucide="upload-cloud" class="w-5 h-5 mr-2 text-blue-600"></i> 圖面與環境照片
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">8. 有無場地平面圖/CAD 檔？</label>
+                        <p class="text-xs text-gray-500 mb-3">(請於業務聯繫後提供)</p>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="hasFloorPlan" value="yes" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">有圖面</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="hasFloorPlan" value="no" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">無圖面(需現場丈量)</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">9. 提供環境照片及影片？</label>
+                        <p class="text-xs text-gray-500 mb-3">(後續提供給業務即可)</p>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="hasPhotos" value="yes" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">有</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="hasPhotos" value="no" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">無</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6 pt-6 border-t border-gray-200">
+                <h2 class="text-xl font-bold text-gray-800 border-b pb-2 flex items-center">
+                    <i data-lucide="cpu" class="w-5 h-5 mr-2 text-blue-600"></i> 標案與自動化需求
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">12. 是否為公家機關標案？ <span class="text-red-500">*</span></label>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="isGovBid" value="yes" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">是</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="isGovBid" value="no" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">否</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="gov-bid-group" class="hidden-section p-3 bg-blue-50 border border-blue-200 rounded-md">
+                        <label class="block text-sm font-medium text-gray-800 mb-2">13. 無軌為專利產品，可否接受限制性招標(我司提供規範)？ <span class="text-red-500">*</span></label>
+                        <div class="flex space-x-4">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="acceptRestrictedBid" value="yes" class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">可接受</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="acceptRestrictedBid" value="no" class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                <span class="text-gray-700">不接受</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-5 rounded-lg border border-gray-200">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">14. 有無自動化需求？ <span class="text-red-500">*</span></label>
+                    <div class="flex space-x-4 mb-4">
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="radio" name="needAutomation" value="yes" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                            <span class="text-gray-700">有</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="radio" name="needAutomation" value="no" required class="w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                            <span class="text-gray-700">無</span>
+                        </label>
+                    </div>
+                    <div id="automation-group" class="hidden-section space-y-4 mt-4 pt-4 border-t border-gray-200">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">請選擇自動化需求方向： <span class="text-red-500">*</span></label>
+                            <div class="flex flex-col space-y-3">
+                                <label class="flex items-start space-x-3 cursor-pointer p-3 border rounded-md hover:bg-white bg-white">
+                                    <input type="radio" name="automationType" value="semi" class="mt-1 w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                    <div>
+                                        <span class="block text-gray-800 font-medium">半自動化</span>
+                                        <span class="block text-sm text-gray-500">電動無軌移動櫃/ 電動無軌重型貨架</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 cursor-pointer p-3 border rounded-md hover:bg-white bg-white">
+                                    <input type="radio" name="automationType" value="agv" class="mt-1 w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                    <div>
+                                        <span class="block text-gray-800 font-medium">機具自動化(AGV/AMR)</span>
+                                        <span class="block text-sm text-gray-500">無人堆高機/ 無人拖板車</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 cursor-pointer p-3 border rounded-md hover:bg-white bg-white">
+                                    <input type="radio" name="automationType" value="phased" class="mt-1 w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                    <div>
+                                        <span class="block text-gray-800 font-medium">可同步/階段性升級</span>
+                                        <span class="block text-sm text-gray-500">預留未來擴充自動化系統之彈性</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 cursor-pointer p-3 border rounded-md hover:bg-white bg-white">
+                                    <input type="radio" name="automationType" value="evaluate" class="mt-1 w-4 h-4 text-blue-600 focus:ring-blue-500" />
+                                    <div>
+                                        <span class="block text-gray-800 font-medium">先評估方案及預算</span>
+                                        <span class="block text-sm text-gray-500">由專員協助進行整體效益規劃</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">預算級距： <span class="text-red-500">*</span></label>
+                            <select name="budgetRange" class="w-full md:w-1/2 rounded-md border-gray-300 border shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 bg-white">
+                                <option value="">請選擇預算級距</option>
+                                <option value="10-200 萬下">10 - 200 萬下</option>
+                                <option value="200-500 萬">200 - 500 萬</option>
+                                <option value="500-1000 萬">500 - 1000 萬</option>
+                                <option value="1000 萬以上">1000 萬以上</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6 pt-6 border-t border-gray-200">
+                <h2 class="text-xl font-bold text-gray-800 border-b pb-2 flex items-center">
+                    <i data-lucide="user" class="w-5 h-5 mr-2 text-blue-600"></i> 客戶基本資料
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50 p-5 rounded-lg border border-gray-200">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">公司名稱： <span class="text-red-500">*</span></label>
+                        <input type="text" name="companyName" required placeholder="請輸入公司名稱" class="w-full rounded-md border-gray-300 border shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">聯絡人/ 電話： <span class="text-red-500">*</span></label>
+                        <input type="text" name="contactInfo" required placeholder="姓名/ 聯絡電話" class="w-full rounded-md border-gray-300 border shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">電子信箱： <span class="text-red-500">*</span></label>
+                        <input type="email" name="email" required placeholder="example@email.com" class="w-full rounded-md border-gray-300 border shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">從何得知我們的： <span class="text-red-500">*</span></label>
+                        <select name="referralSource" required class="w-full rounded-md border-gray-300 border shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 bg-white">
+                            <option value="">請選擇</option>
+                            <option value="官網">官網</option>
+                            <option value="Google 關鍵字">Google 關鍵字</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">留言內容：</label>
+                        <textarea name="message" rows="3" placeholder="有任何其他需求或疑問，請在此留言" class="w-full rounded-md border-gray-300 border shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8">
+                <button type="submit" id="submit-btn" class="w-full flex justify-center items-center py-4 px-4 border border-transparent rounded-lg shadow-sm text-lg font-bold text-white transition-colors bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    送出評估並查看推薦方案
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div id="success-container" class="hidden-section max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+        <div class="bg-blue-600 p-6 text-white text-center">
+            <i data-lucide="check-circle" class="w-16 h-16 mx-auto mb-4 text-blue-200"></i>
+            <h2 class="text-2xl font-bold">評估完成！</h2>
+            <p class="mt-2 text-blue-100">感謝您的填寫，以下是系統根據您的需求為您初步推薦的解決方案</p>
+        </div>
+        <div class="p-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-6 border-b pb-2 flex items-center">
+                <i data-lucide="box" class="w-5 h-5 mr-2 text-blue-600"></i> 推薦產品與設備
+            </h3>
+            
+            <div id="recs-container" class="grid gap-6 mb-8">
+                </div>
+
+            <div id="warnings-wrapper" class="hidden-section">
+                <h3 class="text-xl font-bold text-gray-800 mb-6 border-b pb-2 flex items-center mt-8">
+                    <i data-lucide="alert-triangle" class="w-5 h-5 mr-2 text-amber-500"></i> 專業注意事項
+                </h3>
+                <div class="bg-amber-50 rounded-lg p-5 border border-amber-200 mb-8">
+                    <ul id="warnings-container" class="list-disc pl-5 space-y-2 text-amber-900">
+                        </ul>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6 text-center border border-gray-200 mt-8">
+                <p class="text-gray-600 mb-6">
+                    此為系統初步建議。我們的業務顧問將在 24 小時內與您聯繫，索取場地照片/CAD 圖面並提供正式報價。
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="https://rack104.com.tw/" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors flex items-center justify-center shadow-sm">
+                        前往官網觀看客戶實績 <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                    </a>
+                    <button type="button" id="reset-btn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-6 rounded-lg transition-colors">
+                        重新填寫表單
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. 初始化 Lucide Icons
+        lucide.createIcons();
+
+        // 2. 縣市資料與注入
+        const TAIWAN_CITIES = [
+            "臺北市", "新北市", "基隆市", "桃園市", "新竹縣", "新竹市", "苗栗縣",
+            "臺中市", "南投縣", "彰化縣", "雲林縣", "嘉義縣", "嘉義市", "臺南市",
+            "高雄市", "屏東縣", "宜蘭縣", "花蓮縣", "臺東縣", "澎湖縣", "金門縣", "連江縣"
+        ];
+        const locationSelect = document.getElementById('location-select');
+        TAIWAN_CITIES.forEach(city => {
+            const option = document.createElement('option');
+            option.value = city;
+            option.textContent = city;
+            locationSelect.appendChild(option);
+        });
+
+        // 3. 處理表單的條件顯示邏輯
+        const form = document.getElementById('assessment-form');
+
+        // 輔助函數：控制顯示隱藏與必填屬性
+        function toggleSection(elementId, shouldShow, requiredInputNames = []) {
+            const el = document.getElementById(elementId);
+            if (shouldShow) {
+                el.classList.remove('hidden-section');
+                requiredInputNames.forEach(name => {
+                    form.querySelectorAll(`[name="${name}"]`).forEach(input => input.required = true);
+                });
+            } else {
+                el.classList.add('hidden-section');
+                requiredInputNames.forEach(name => {
+                    form.querySelectorAll(`[name="${name}"]`).forEach(input => input.required = false);
+                });
+            }
+        }
+
+        form.addEventListener('change', () => {
+            const formData = new FormData(form);
+            
+            // 是否為1樓 -> 非一樓顯示樓層輸入
+            const isFirstFloor = formData.get('isFirstFloor');
+            toggleSection('not-first-floor-group', isFirstFloor === 'no', ['floorLevel', 'floorLoadBearing']);
+
+            // 儲存品項 -> 其他
+            const storageItem = formData.get('storageItem');
+            toggleSection('storageItemOther', storageItem === 'other', ['storageItemOther']);
+
+            // 溫度需求 -> 顯示設定溫度
+            const tempType = formData.get('tempType');
+            toggleSection('temp-range-group', tempType === 'refrigerated' || tempType === 'frozen', ['tempRangeStart', 'tempRangeEnd']);
+
+            // 標案需求 -> 接受限制性招標
+            const isGovBid = formData.get('isGovBid');
+            toggleSection('gov-bid-group', isGovBid === 'yes', ['acceptRestrictedBid']);
+
+            // 自動化需求 -> 顯示自動化選項
+            const needAutomation = formData.get('needAutomation');
+            toggleSection('automation-group', needAutomation === 'yes', ['automationType', 'budgetRange']);
+        });
+
+        // 4. 產生推薦邏輯
+        function generateRecommendations(data) {
+            let recs = [];
+            let warnings = [];
+
+            // 1. 根據存取方式推薦基本料架
+            recs.push({
+                title: "無軌移動櫃(手動/電動)",
+                desc: "採用獨家專利無軌設計，不破壞地面且大幅增加儲位，可依您的存取需求與預算選擇手動或電動系統配置。"
+            });
+
+            if ((data.accessMethod === 'machine' || data.accessMethod === 'both') && Number(data.loadPerItem) > 1000) {
+                recs.push({
+                    title: "超重型結構加強設計",
+                    desc: "因單板荷重較大(>1000KG)，建議採用加厚立柱與橫樑，確保整體倉儲安全性。"
+                });
+            }
+
+            // 2. 根據挑高空間推薦
+            if (data.isHighCeiling === 'yes') {
+                recs.push({
+                    title: "積層式物料架(夾層/閣樓)",
+                    desc: "充分利用挑高空間，規劃多樓層結構，使廠房使用面積倍增，搭配升降設備或樓梯皆宜。"
+                });
+            }
+
+            // 3. 根據廠房性質推薦
+            if (data.factoryType === 'lease') {
+                recs.push({
+                    title: "模組化易拆裝設計",
+                    desc: "考量為租賃廠房，建議採用100%螺栓組裝或卡扣式設計，未來若需廠房搬遷，料架可完全拆卸帶走重複使用。"
+                });
+            }
+
+            // 4. 根據儲存品項推薦
+            if (data.storageItem === 'chemical' || data.storageItem === 'liquid') {
+                warnings.push("因儲存化學品或液體，建議底部配置「防漏托盤」，並評估料架表面是否需做特殊防腐蝕烤漆處理。");
+            } else if (data.storageItem === 'food') {
+                warnings.push("食品級倉儲建議注意環境通風，料架可選用易清潔塗層或不鏽鋼材質，並保持貨物與地面/牆面距離以防潮防蟲。");
+            }
+
+            if (data.tempType === 'refrigerated' || data.tempType === 'frozen') {
+                warnings.push(`👉 ${data.tempType === 'frozen' ? '冷凍' : '冷藏'}環境(${data.tempRangeStart}°C ~ ${data.tempRangeEnd}°C)：需採用耐低溫材質與防鏽處理的專屬料架，避免低溫脆化及溫差結露造成的結構影響。`);
+            }
+
+            if (data.needFIFO === 'yes') {
+                recs.push({
+                    title: "雙板深水平模組",
+                    desc: "針對先進先出需求，建議採用雙板深水平模組，適合單一品項兩板一起進出，有效提升整體存取效率與儲位管理。"
+                });
+            }
+
+            if (data.palletDiversity === 'singleLarge') {
+                recs.push({
+                    title: "高密度儲存(駛入式/無軌電動移動貨架)",
+                    desc: "因棧板品項單一且量大，適合採用高密度儲存的「駛入式」或「無軌電動移動貨架」料架，可大幅減少通道空間，極大化儲存深度與密度。"
+                });
+            }
+
+            // 5. 根據樓層與荷重評估
+            if (data.isFirstFloor === 'no') {
+                if (Number(data.floorLoadBearing) < 500) {
+                    warnings.push(`👉 注意：非一樓(位於${data.floorLevel} 樓) 且樓板荷重較低(${data.floorLoadBearing} KG/m²)，必須採用「載重分散底座」，或限制最高堆疊高度，以免危及建築結構安全。`);
+                } else {
+                    warnings.push(`非一樓空間(位於${data.floorLevel} 樓) 施工需額外評估電梯運載尺寸與進場動線。`);
+                }
+            }
+
+            // 6. 根據自動化與標案需求評估
+            if (data.isGovBid === 'yes') {
+                warnings.push("公家機關標案：若貴單位有專利無軌產品需求，我司可提供完整之「限制性招標規範」協助推動專案。");
+                if (data.acceptRestrictedBid === 'yes') {
+                    recs.push({
+                        title: "專利無軌移動櫃/貨架",
+                        desc: "符合限制性招標條件，採用獨家專利無軌設計，不破壞地面且大幅增加儲位，是最適合公家機關升級的方案。"
+                    });
+                }
+            }
+
+            if (data.needAutomation === 'yes') {
+                if (data.automationType === 'semi') {
+                    recs.push({
+                        title: "半自動化：電動無軌移動櫃/ 重型貨架",
+                        desc: `運用電動無軌系統進行高密度儲存，省下走道空間。預算評估落點：${data.budgetRange}`
+                    });
+                } else if (data.automationType === 'agv') {
+                    recs.push({
+                        title: "機具自動化：AGV/AMR 無人搬運",
+                        desc: `搭配無人堆高機或無人拖板車，實現廠房智慧化、無人化的高效運作。預算評估落點：${data.budgetRange}`
+                    });
+                } else if (data.automationType === 'phased') {
+                    recs.push({
+                        title: "階段性自動化升級方案",
+                        desc: `初期先建置基礎倉儲設備，並預留未來擴充半自動或全自動化系統的軟硬體彈性空間。預算評估落點：${data.budgetRange}`
+                    });
+                } else if (data.automationType === 'evaluate') {
+                    recs.push({
+                        title: "全方位自動化評估",
+                        desc: `我們將安排專業顧問與您深入探討，依據您的實際動線與預期目標，量身規劃最適用的自動化方案。預算評估落點：${data.budgetRange}`
+                    });
+                }
+            }
+
+            if (recs.length === 0) {
+                recs.push({
+                    title: "客製化專案規劃",
+                    desc: "我們將派專員進一步了解您的詳細尺寸與動線需求，為您量身打造最佳倉儲方案。"
+                });
+            }
+
+            return { recs, warnings };
+        }
+
+        // 5. 處理表單送出
+        const submitBtn = document.getElementById('submit-btn');
+        const formContainer = document.getElementById('form-container');
+        const successContainer = document.getElementById('success-container');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // 變更按鈕狀態
+            submitBtn.disabled = true;
+            submitBtn.textContent = '資料傳送中...';
+            submitBtn.classList.replace('bg-blue-600', 'bg-blue-400');
+            submitBtn.classList.replace('hover:bg-blue-700', 'cursor-not-allowed');
+
+            // 收集表單資料轉換為 Object
+            const formDataRaw = new FormData(form);
+            const formDataObj = Object.fromEntries(formDataRaw.entries());
+
+            // 模擬網路延遲
+            setTimeout(() => {
+                const results = generateRecommendations(formDataObj);
+                
+                console.log("準備寄送至 shirley@rack104.com.tw 的資料：", {
+                    customerData: {
+                        companyName: formDataObj.companyName,
+                        contact: formDataObj.contactInfo,
+                        email: formDataObj.email,
+                        source: formDataObj.referralSource,
+                        message: formDataObj.message
+                    },
+                    surveyData: formDataObj,
+                    recommendations: results
+                });
+
+                // 渲染推薦結果
+                const recsContainer = document.getElementById('recs-container');
+                recsContainer.innerHTML = results.recs.map(rec => `
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                        <h4 class="text-lg font-bold text-blue-900">${rec.title}</h4>
+                        <p class="mt-1 text-gray-700">${rec.desc}</p>
+                    </div>
+                `).join('');
+
+                // 渲染警告事項
+                const warningsWrapper = document.getElementById('warnings-wrapper');
+                const warningsContainer = document.getElementById('warnings-container');
+                if (results.warnings.length > 0) {
+                    warningsWrapper.classList.remove('hidden-section');
+                    warningsContainer.innerHTML = results.warnings.map(warning => `<li>${warning}</li>`).join('');
+                } else {
+                    warningsWrapper.classList.add('hidden-section');
+                }
+
+                // 切換畫面
+                formContainer.classList.add('hidden-section');
+                successContainer.classList.remove('hidden-section');
+                
+                // 恢復按鈕狀態 (以便重新填寫時可用)
+                submitBtn.disabled = false;
+                submitBtn.textContent = '送出評估並查看推薦方案';
+                submitBtn.classList.replace('bg-blue-400', 'bg-blue-600');
+                submitBtn.classList.replace('cursor-not-allowed', 'hover:bg-blue-700');
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 1500);
+        });
+
+        // 6. 重新填寫表單
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            form.reset();
+            // 觸發 change 事件重置隱藏區域
+            form.dispatchEvent(new Event('change')); 
+            
+            successContainer.classList.add('hidden-section');
+            formContainer.classList.remove('hidden-section');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+    </script>
+</body>
+</html>
